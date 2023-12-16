@@ -16,6 +16,7 @@ export default function Header() {
       setUser(username.data());
       setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.error("Error fetching data:", error);
     }
   };
@@ -31,9 +32,14 @@ export default function Header() {
           <img className="w-20" src={loader} alt="Loading" />
         </div>
       ) : (
-        <div className="bg-[#4CB9E7] text-white space-y-1 font-poppins pt-16 pb-10 px-5">
-          <p className="text-lg">Hi {user.username},</p>
-          <p className="text-2xl font-bold">Discover Events</p>
+        <div className="bg-[#4CB9E7] text-white space-y-2 font-poppins pt-16 pb-10 px-5">
+          <p className="text-2xl">Hi {user.username},</p>
+          <p className="text-lg font-semibold">
+            Discover upcoming events and check the weather on event days.
+          </p>
+          {/* <button className="text-black bg-white rounded-full px-4 py-2 font-poppins text-sm mt-5">
+            Get Started
+          </button> */}
         </div>
       )}
     </>
