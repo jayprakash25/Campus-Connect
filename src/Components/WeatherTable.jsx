@@ -1,19 +1,23 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export default function WeatherTable({ temp, sky, humidity }) {
+export default function WeatherTable({ temp, sky, humidity, visibility }) {
   const rows = [
     {
       header: "Temperature(°C)",
       row: temp + "°C",
     },
     {
-      header: "Sky",
+      header: "Cloudiness",
       row: sky,
     },
     {
       header: "Humidity",
       row: humidity,
+    },
+    {
+      header: "Visibility range",
+      row: visibility + "m",
     },
   ];
 
@@ -52,7 +56,8 @@ export default function WeatherTable({ temp, sky, humidity }) {
 }
 
 WeatherTable.propTypes = {
-  temp: PropTypes.string.isRequired,
-  sky: PropTypes.string.isRequired,
-  humidity: PropTypes.string.isRequired,
+  temp: PropTypes.string,
+  sky: PropTypes.string,
+  humidity: PropTypes.string,
+  visibility: PropTypes.string,
 };

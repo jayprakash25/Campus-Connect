@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Navbar from "../Components/Navbar";
 
 export default function Events() {
   const data = [
@@ -37,6 +39,11 @@ export default function Events() {
 
   return (
     <main>
+      {/* <div className="w-full text-left pb-4">
+        <Link to="/home">
+          <ArrowBackIcon />
+        </Link>
+      </div> */}
       <div className="p-7 px-5">
         <h1 className="text-3xl font-semibold">Events</h1>
       </div>
@@ -88,6 +95,7 @@ export default function Events() {
           );
         })}
       </div>
+      <Navbar />
     </main>
   );
 }
