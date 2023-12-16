@@ -1,16 +1,31 @@
 import { useState } from "react";
 import Button from "../Components/Button";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../Firebase";
+import { useNavigate } from "react-router-dom/dist";
 
 export default function Login() {
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   const submit = async (e) => {
     e.preventDefault();
     try {
-      //
+      //const auth = getAuth();
+      signInWithEmailAndPassword(auth, user.email, user.password)
+        .then((userCredential) => {
+          // Signed in
+          console.log(userCredential);
+          navigate("/home");
+          // const user = userCredential.user;
+          // ...
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     } catch (error) {
       console.log(error);
     }

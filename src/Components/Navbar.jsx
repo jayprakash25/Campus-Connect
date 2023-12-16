@@ -1,8 +1,9 @@
 import { PiHouse } from "react-icons/pi";
 import { CgProfile } from "react-icons/cg";
 import { Link } from "react-router-dom";
-import { IoMdPeople } from "react-icons/io";
 import { IoIosSchool } from "react-icons/io";
+import { FaCloudSunRain } from "react-icons/fa6";
+import EventAvailableIcon from "@mui/icons-material/EventAvailable";
 
 export default function Navbar() {
   const liststyle = "flex flex-col items-center gap-1 cursor-pointer";
@@ -19,12 +20,12 @@ export default function Navbar() {
           </Link>
           <Link to={"/people"}>
             <li className={liststyle}>
-              <IoMdPeople size={25} color="white" />
+              <EventAvailableIcon size={25} color="white" />
               {/* <h1>People</h1> */}
             </li>
           </Link>
           <li>
-            <IoIosSchool size={25} color="white" />
+            <FaCloudSunRain className={liststyle} size={25} color="white" />
             {/* <h1>Collage</h1> */}
           </li>
           <Link to={"/profile"}>

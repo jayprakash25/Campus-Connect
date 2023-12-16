@@ -19,6 +19,18 @@ export default function Signin() {
   const provider = new GoogleAuthProvider();
   const UserToken = useId();
 
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handlePasswordChange = (e) => {
+    setUser({ ...user, password: e.target.value });
+    // Check if the password is less than 6 characters
+    if (e.target.value.length >= 6) {
+      setErrorMessage("");
+
+      // setErrorMessage("Password must be at least 6 characters long");
+    }
+  };
+
   const GoogleSignIn = async () => {
     try {
       signInWithPopup(auth, provider)
@@ -50,15 +62,24 @@ export default function Signin() {
   const submit = async (e) => {
     e.preventDefault();
     try {
-      createUserWithEmailAndPassword(auth, user.email, user.password)
-        .then((userCredential) => {
-          // Signed up
-          const user = userCredential.user;
-          console.log(user);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      // Check if the password meets the length requirement
+      if (user.password.length < 6) {
+        setErrorMessage("Password must be at least 6 characters long");
+        return;
+      }
+
+      // Continue with Firebase authentication
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        user.email,
+        user.password
+      );
+      const newUser = userCredential.user;
+      console.log(newUser);
+
+      const docRef = doc(db, "Users", UserToken);
+      await setDoc(docRef, user);
+      navigate("/home");
     } catch (error) {
       console.log(error);
     }
@@ -100,13 +121,11 @@ export default function Signin() {
               className="outline-none w-full py-2.5 text-lg bg-slate-100 px-5"
               placeholder="Password"
               value={user.password}
-              onChange={(e) => {
-                setUser({
-                  ...user,
-                  password: e.target.value,
-                });
-              }}
+              onChange={handlePasswordChange}
             />
+            {errorMessage && (
+              <div className="text-sm text-red-600">{errorMessage}</div>
+            )}
           </form>
         </div>
 
@@ -124,6 +143,12 @@ export default function Signin() {
             logo={<GoogleIcon />}
             handleSubmit={GoogleSignIn}
           />
+        </div>
+        <div className="flex text-sm items-center space-x-2 text-center justify-center">
+          <p>Already have an account?</p>
+          <a className=" text-sm text-[#0064e0]" href="/">
+            Login
+          </a>
         </div>
       </div>
     </div>
