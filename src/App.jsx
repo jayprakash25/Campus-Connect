@@ -5,6 +5,7 @@ import Login from "./Pages/Login";
 import Home from "./Pages/Home";
 import Events from "./Pages/Events";
 import FullEventPage from "./Pages/FullEventPage";
+import UserProfile from "./Pages/UserProfile";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/events" element={<Events />} />
         <Route path="/eventpage" element={<FullEventPage />} />
+        <Route path="/user-profile" element={<UserProfile />} />
       </Routes>
     </>
   );

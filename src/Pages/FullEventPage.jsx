@@ -10,18 +10,18 @@ export default function FullEventPage() {
   const page = useLocation();
   const [data, setData] = useState("");
   const [loading, setLoading] = useState(false);
+  const { image, Tittle, location, Date, Time, FullAddress, Lat, Long } =
+    page.state;
 
   const api_key = `405e4dc7759a0577b7cfac44e489076e`;
 
-  const url = `https://api.openweathermap.org/data/2.5/weather?lat=44.34&lon=10.99&appid=${api_key}&units=metric`;
+  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${Lat}&lon=${Long}&appid=${api_key}&units=metric`;
 
   const getWeather = () => {
     setLoading(true);
     axios.get(url).then((response) => {
       setData(response.data);
       setLoading(false);
-
-      console.log(data);
     });
   };
 
@@ -29,7 +29,6 @@ export default function FullEventPage() {
     getWeather();
   }, []);
 
-  const { image, Tittle, location, Date, Time, FullAddress } = page.state;
   // const { image } = page.state;
 
   return (
@@ -47,7 +46,7 @@ export default function FullEventPage() {
                 <ArrowBackIcon />
               </Link>
             </div>
-            <div className="lg:flex justify-center space-x-12 w-full items-start">
+            <div className="lg:flex justify-center lg:space-x-12 w-full items-center lg:items-start">
               <div className="">
                 <div className="relative">
                   <img

@@ -43,7 +43,7 @@ export default function WeatherTable({ temp, sky, humidity, visibility }) {
                     >
                       {_.header}
                     </th>
-                    <td className="px-6 py-4 text-lg">{_.row}</td>
+                    <td className="px-6 py-4 lg:text-lg">{_.row}</td>
                   </tr>
                 </React.Fragment>
               );

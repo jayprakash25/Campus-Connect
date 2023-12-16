@@ -1,37 +1,42 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../Components/Navbar";
+import { hack, car, event } from "../assets/events";
 
 export default function Events() {
   const data = [
     {
-      image:
-        "https://images.pexels.com/photos/976866/pexels-photo-976866.jpeg?auto=compress&cs=tinysrgb&w=600",
-      Tittle: "The Lalit",
-      location: "Hyderabad Kompally ",
-      Address: "SNR Gardens Kompally",
-      Date: "31 Dec 2023",
+      image: hack,
+      Tittle: "Hack The Verse",
+      location: "CMRTC, Kandlakoya ",
+      Address: "CMRTC, Kandlakoya",
+      Date: "21 Dec 2023",
       Time: "6:30pm - 12:30am",
-      FullAddress: "Hyderabad Kompally SNR Garden beside sri Chaithyna School",
+      Lat: "17.5971",
+      Long: "78.4865",
+      FullAddress:
+        " Kandlakoya Village, Medchal Rd,, Hyderabad, Telangana 501401",
     },
     {
-      image:
-        "https://images.pexels.com/photos/976866/pexels-photo-976866.jpeg?auto=compress&cs=tinysrgb&w=600",
-      Tittle: "The Lalit",
-      location: "Hyderabad Kompally ",
-      Address: "SNR Gardens Kompally",
-      Date: "31 Dec 2023",
+      image: car,
+      Tittle: "Cars",
+      location: "Hitech-City ",
+      Address: "Hitech-City, Hyderabad",
+      Date: "1 Jan 2024",
       Time: "6:30pm - 12:30am",
-      FullAddress: "Hyderabad Kompally SNR Garden beside sri Chaithyna School",
+      Lat: "17.4435",
+      Long: "78.3772",
+      FullAddress: "Hitech-City, 500081",
     },
     {
-      image:
-        "https://images.pexels.com/photos/976866/pexels-photo-976866.jpeg?auto=compress&cs=tinysrgb&w=600",
+      image: event,
       Tittle: "The Lalit",
       location: "Hyderabad Kompally ",
       Address: "SNR Gardens Kompally",
       Date: "31 Dec 2023",
       Time: "6:30pm - 12:30am",
+      Lat: "17.5366",
+      Long: "78.4845",
       FullAddress: "Hyderabad Kompally SNR Garden beside sri Chaithyna School",
     },
   ];
@@ -58,6 +63,8 @@ export default function Events() {
                   Date: `${item.Date}`,
                   Time: `${item.Time}`,
                   FullAddress: `${item.FullAddress}`,
+                  Lat: `${item.Lat}`,
+                  Long: `${item.Long}`,
                 }}
               >
                 <div className="shadow-sm shadow-gray-200 space-y-4 cursor-pointer">

@@ -22,7 +22,7 @@ export default function Navbar() {
             </li>
           </Link>
 
-          <Link to={"/profile"}>
+          <Link to={"/user-profile"}>
             <li className={liststyle}>
               <CgProfile size={25} color="white" />
             </li>
