@@ -96,14 +96,14 @@ export default function Signin() {
     }
   };
   return (
-    <div className="px-5">
+    <div className="px-5 lg:flex items-center justify-center lg:h-screen">
       {loading ? (
         // Display the loading spinner or GIF while content is loading
         <div className="flex  items-center justify-center h-screen">
           <img className="w-20" src={loader} alt="Loading" />
         </div>
       ) : (
-        <div className="flex flex-col justify-center h-screen w-full">
+        <div className="flex flex-col justify-center h-screen w-full lg:w-[35vw] lg:p-6 lg:shadow-md lg:border lg:h-auto">
           <div className="flex flex-col items-center px-2 py-5 space-y-4 text-2xl font-semibold">
             <p className="text-center">
               As a <span className="text-slate-500">user</span>, I am entering

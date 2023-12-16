@@ -9,7 +9,7 @@ export default function Navbar() {
 
   return (
     <footer className="fixed bottom-0 pb-5 px-5  w-full flex items-center justify-center">
-      <div className="w-[70vw] bg-[#4CB9E7] rounded-full">
+      <div className="w-[70vw] lg:w-[30vw] bg-[#4CB9E7] rounded-full">
         <ul className="flex items-center  p-3.5 px-2 text-sm font-semibold text-center text-white justify-evenly">
           <Link to={"/home"}>
             <li className={liststyle}>

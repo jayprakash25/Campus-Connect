@@ -38,18 +38,13 @@ export default function Events() {
 
   return (
     <main>
-      {/* <div className="w-full text-left pb-4">
-        <Link to="/home">
-          <ArrowBackIcon />
-        </Link>
-      </div> */}
       <div className="p-7 px-5 bg-[#4CB9E7]">
         <h1 className="text-2xl font-semibold text-white font-poppins">
           Events
         </h1>
       </div>
       {/* events */}
-      <div className="px-5 grid justify-center   items-center gap-7 my-5">
+      <div className="px-5 grid justify-center lg:grid lg:grid-cols-3  items-center gap-7 my-5 lg:my-10 lg:place-items-center">
         {data.map((item, i) => {
           return (
             <React.Fragment key={i}>
@@ -69,7 +64,7 @@ export default function Events() {
                   <div className="relative space-y-4">
                     <img
                       src={item.image}
-                      className={`w-[20rem] object-cover blur-[1px]  rounded-lg  brightness-50
+                      className={`w-[20rem] lg:w-[30rem] object-cover blur-[1px]  rounded-lg  brightness-50
                        ease-in-out duration-500`}
                       alt={item.image}
                     />

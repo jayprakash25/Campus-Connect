@@ -27,7 +27,7 @@ export default function WeatherTable({ temp, sky, humidity, visibility }) {
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
             <tr>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-6 py-3 lg:text-2xl">
                 Weather
               </th>
             </tr>
@@ -39,11 +39,11 @@ export default function WeatherTable({ temp, sky, humidity, visibility }) {
                   <tr className="odd:bg-white  odd:text-gray-800 even:text-gray-600  border-b dark:border-gray-700">
                     <th
                       scope="row"
-                      className="px-6 py-4 font-medium  whitespace-nowrap "
+                      className="px-6 py-4 font-medium lg:text-xl  whitespace-nowrap "
                     >
                       {_.header}
                     </th>
-                    <td className="px-6 py-4">{_.row}</td>
+                    <td className="px-6 py-4 text-lg">{_.row}</td>
                   </tr>
                 </React.Fragment>
               );
