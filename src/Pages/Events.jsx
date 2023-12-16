@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Navbar from "../Components/Navbar";
 
 export default function Events() {
@@ -44,8 +43,10 @@ export default function Events() {
           <ArrowBackIcon />
         </Link>
       </div> */}
-      <div className="p-7 px-5">
-        <h1 className="text-3xl font-semibold">Events</h1>
+      <div className="p-7 px-5 bg-[#4CB9E7]">
+        <h1 className="text-2xl font-semibold text-white font-poppins">
+          Events
+        </h1>
       </div>
       {/* events */}
       <div className="px-5 grid justify-center   items-center gap-7 my-5">

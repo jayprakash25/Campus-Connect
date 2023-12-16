@@ -6,6 +6,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { GoogleAuthProvider } from "firebase/auth";
 
 import { auth, db } from "../Firebase";
+import loader from "../assets/loader.gif";
 
 import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 
@@ -15,6 +16,8 @@ export default function Signin() {
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
   const provider = new GoogleAuthProvider();
   const UserToken = useId();
@@ -64,6 +67,8 @@ export default function Signin() {
 
   const submit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     try {
       // Check if the password meets the length requirement
       if (user.password.length < 6) {
@@ -83,6 +88,7 @@ export default function Signin() {
       const docRef = doc(db, "Users", UserToken);
       await setDoc(docRef, user);
       await window.localStorage.setItem("jwt", UserToken);
+      setLoading(false);
 
       navigate("/home");
     } catch (error) {
@@ -91,71 +97,79 @@ export default function Signin() {
   };
   return (
     <div className="px-5">
-      <div className="flex flex-col justify-center h-screen w-full">
-        <div className="flex flex-col items-center px-2 py-5 space-y-4 text-2xl font-semibold">
-          <p className="text-center">
-            As a <span className="text-slate-500">user</span>, I am entering my
-          </p>
-          <form className="space-y-4">
-            <input
-              type="text"
-              className=" outline-none text-lg w-full py-2.5 border border-b-2 px-5"
-              placeholder="Username"
-              value={user.username}
-              onChange={(e) => {
-                setUser({
-                  ...user,
-                  username: e.target.value,
-                });
-              }}
-            />
-            <input
-              type="email"
-              className=" outline-none text-lg w-full py-2.5 border border-b-2 px-5"
-              placeholder="Email"
-              value={user.email}
-              onChange={(e) => {
-                setUser({
-                  ...user,
-                  email: e.target.value,
-                });
-              }}
-            />
-            <input
-              type="password"
-              className="outline-none w-full py-2.5 text-lg bg-slate-100 px-5"
-              placeholder="Password"
-              value={user.password}
-              onChange={handlePasswordChange}
-            />
-            {errorMessage && (
-              <div className="text-sm text-red-600">{errorMessage}</div>
-            )}
-          </form>
+      {loading ? (
+        // Display the loading spinner or GIF while content is loading
+        <div className="flex  items-center justify-center h-screen">
+          <img className="w-20" src={loader} alt="Loading" />
         </div>
+      ) : (
+        <div className="flex flex-col justify-center h-screen w-full">
+          <div className="flex flex-col items-center px-2 py-5 space-y-4 text-2xl font-semibold">
+            <p className="text-center">
+              As a <span className="text-slate-500">user</span>, I am entering
+              my
+            </p>
+            <form className="space-y-4">
+              <input
+                type="text"
+                className=" outline-none text-lg w-full py-2.5 border border-b-2 px-5"
+                placeholder="Username"
+                value={user.username}
+                onChange={(e) => {
+                  setUser({
+                    ...user,
+                    username: e.target.value,
+                  });
+                }}
+              />
+              <input
+                type="email"
+                className=" outline-none text-lg w-full py-2.5 border border-b-2 px-5"
+                placeholder="Email"
+                value={user.email}
+                onChange={(e) => {
+                  setUser({
+                    ...user,
+                    email: e.target.value,
+                  });
+                }}
+              />
+              <input
+                type="password"
+                className="outline-none w-full py-2.5 text-lg bg-slate-100 px-5"
+                placeholder="Password"
+                value={user.password}
+                onChange={handlePasswordChange}
+              />
+              {errorMessage && (
+                <div className="text-sm text-red-600">{errorMessage}</div>
+              )}
+            </form>
+          </div>
 
-        <div className="px-2 py-5 space-y-6">
-          <Button handleSubmit={submit} title="Sign-Up" />
+          <div className="px-2 py-5 space-y-6">
+            <Button handleSubmit={submit} title="Sign-Up" />
+          </div>
+          <div className="flex items-start justify-center space-x-3 text-center text-slate-500">
+            <span>--------------</span>
+            <h1>OR</h1>
+            <span>--------------</span>
+          </div>
+          <div className="px-2 py-5 space-y-6">
+            <Button
+              title="Continue with Google"
+              logo={<GoogleIcon />}
+              handleSubmit={GoogleSignIn}
+            />
+          </div>
+          <div className="flex text-sm items-center space-x-2 text-center justify-center">
+            <p>Already have an account?</p>
+            <a className=" text-sm text-[#0064e0]" href="/">
+              Login
+            </a>
+          </div>
         </div>
-        <div className="flex items-start justify-center space-x-3 text-center text-slate-500">
-          <span>--------------</span>
-          <h1>OR</h1>
-          <span>--------------</span>
-        </div>
-        <div className="px-2 py-5 space-y-6">
-          <Button
-            title="Continue with Google"
-            logo={<GoogleIcon />}
-            handleSubmit={GoogleSignIn}
-          />
-        </div>
-        <div className="flex text-sm items-center space-x-2 text-center justify-center">
-          <p>Already have an account?</p>
-          <a className=" text-sm text-[#0064e0]" href="/">
-            Login
-          </a>
-        </div>
-      </div>
+      )}
     </div>
   );
 }

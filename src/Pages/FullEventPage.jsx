@@ -27,7 +27,7 @@ export default function FullEventPage() {
 
   return (
     <>
-      <div className="grid place-items-center px-5 py-4 bg-[#F0F0F0]">
+      <div className="grid place-items-center px-5 py-4 ">
         <div className="w-full text-left pb-4">
           <Link to="/events">
             <ArrowBackIcon />

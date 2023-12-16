@@ -1,15 +1,20 @@
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../Firebase";
 import { useEffect, useState } from "react";
+import loader from "../assets/loader.gif";
 
 export default function Header() {
   const [user, setUser] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const jwt = window.localStorage.getItem("jwt");
   const fetchData = async () => {
+    setLoading(true);
     try {
       const docref = doc(db, "Users", jwt);
       const username = await getDoc(docref);
       setUser(username.data());
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -19,9 +24,18 @@ export default function Header() {
     fetchData();
   }, []);
   return (
-    <div className="bg-[#4CB9E7] text-white font-poppins pt-16 px-5">
-      <p>Hi {user.username},</p>
-      <p className="text-xl font-bold">Discover Events</p>
-    </div>
+    <>
+      {loading ? (
+        // Display the loading spinner or GIF while content is loading
+        <div className="flex  items-center justify-center h-screen">
+          <img className="w-20" src={loader} alt="Loading" />
+        </div>
+      ) : (
+        <div className="bg-[#4CB9E7] text-white space-y-1 font-poppins pt-16 pb-10 px-5">
+          <p className="text-lg">Hi {user.username},</p>
+          <p className="text-2xl font-bold">Discover Events</p>
+        </div>
+      )}
+    </>
   );
 }
