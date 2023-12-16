@@ -41,6 +41,7 @@ export default function Signin() {
           // The signed-in user info.
           // const user = result.user;
           // ...
+
           console.log(result);
         })
         .catch((error) => {
@@ -53,6 +54,8 @@ export default function Signin() {
 
       const docRef = doc(db, "Users", UserToken);
       await setDoc(docRef, user);
+      await window.localStorage.setItem("jwt", UserToken);
+
       navigate("/home");
     } catch (error) {
       console.log(error);
@@ -79,6 +82,8 @@ export default function Signin() {
 
       const docRef = doc(db, "Users", UserToken);
       await setDoc(docRef, user);
+      await window.localStorage.setItem("jwt", UserToken);
+
       navigate("/home");
     } catch (error) {
       console.log(error);

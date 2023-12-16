@@ -18,7 +18,7 @@ export default function Navbar() {
               {/* <h1>Home</h1> */}
             </li>
           </Link>
-          <Link to={"/people"}>
+          <Link to={"/events"}>
             <li className={liststyle}>
               <EventAvailableIcon size={25} color="white" />
               {/* <h1>People</h1> */}
