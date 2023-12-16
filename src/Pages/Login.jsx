@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Button from "../Components/Button";
-import axios from "axios";
 
 export default function Login() {
   const [user, setUser] = useState({
@@ -11,9 +10,7 @@ export default function Login() {
   const submit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("/", {
-        user,
-      });
+      //
     } catch (error) {
       console.log(error);
     }
