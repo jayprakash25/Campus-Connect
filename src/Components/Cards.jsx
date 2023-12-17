@@ -29,7 +29,7 @@ export default function Cards() {
   const getActivitySuggestion = (temperature) => {
     if (temperature < 10) {
       return "It's cold! Consider staying indoors and enjoying a warm drink.";
-    } else if (temperature >= 10 && temperature < 20) {
+    } else if (temperature >= 10 && temperature < 25) {
       return "Cool weather! Perfect for a walk in the park.";
     } else {
       return "Warm weather! Pack a picnic and enjoy the outdoors.";
