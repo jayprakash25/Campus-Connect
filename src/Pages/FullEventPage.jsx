@@ -5,8 +5,13 @@ import { useEffect, useState } from "react";
 import WeatherTable from "../Components/WeatherTable";
 import Navbar from "../Components/Navbar";
 import loader from "../assets/loader.gif";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 export default function FullEventPage() {
+  useEffect(() => {
+    Aos.init();
+  }, []);
   const page = useLocation();
   const [data, setData] = useState("");
   const [loading, setLoading] = useState(false);
@@ -25,11 +30,13 @@ export default function FullEventPage() {
     });
   };
 
+  const isWarmAndSunny = data?.main?.temp >= 24 && data?.clouds?.all < 50; // 75°F to Celsius
+  const isHotAndHumid = data?.main?.temp >= 29 && data?.main?.humidity >= 70; // 85°F to Celsius
+  const isCloudyOrCool = data?.clouds?.all >= 50 || data?.main?.temp < 15; // 60°F to Celsius
+
   useEffect(() => {
     getWeather();
   }, []);
-
-  // const { image } = page.state;
 
   return (
     <>
@@ -48,7 +55,11 @@ export default function FullEventPage() {
             </div>
             <div className="lg:flex justify-center lg:space-x-12 w-full items-center lg:items-start">
               <div className="">
-                <div className="relative">
+                <div
+                  data-aos="zoom-in"
+                  data-aos-duration="700"
+                  className="relative"
+                >
                   <img
                     src={image}
                     className="brightness-75 w-[20rem] lg:w-[30rem] object-cover  rounded-lg  
@@ -97,19 +108,45 @@ export default function FullEventPage() {
             </div>
             <div className=" py-6 text-left w-full">
               <h1 className="text-lg font-bold text-slate-800">
-                Things to do:
+                Fun Outdoors, Whatever the Weather: Your Go-To Activity Guide!
               </h1>
               <ul className="space-y-3 my-3 text-gray-500  text-sm">
-                <li>Thing1</li>
-                <li>Thing2</li>
-                <li>Thing3</li>
-                <li>Thing4</li>
-                <li>Thing5</li>
+                {isHotAndHumid && (
+                  <li className="space-y-2">
+                    <h2 className="font-bold text-lg">
+                      Cool Down with Water Activities!
+                    </h2>
+                    <p className="font-poppins text-sm">
+                      Head to the beach, swim in a pool, or try paddleboarding.
+                    </p>
+                  </li>
+                )}
+                {isWarmAndSunny && (
+                  <div className="space-y-2">
+                    <h2 className="font-bold text-lg">Enjoy Outdoor Sports!</h2>
+                    <p className="font-poppins text-sm">
+                      Play tennis, golf, or go for a run in the beautiful
+                      weather.
+                    </p>
+                  </div>
+                )}
+                {isCloudyOrCool && (
+                  <div className="space-y-2">
+                    <h2 className="font-bold text-lg">
+                      Explore Indoor Activities!
+                    </h2>
+                    <p className="font-poppins text-sm">
+                      Visit a museum, try indoor sports, or have a cozy movie
+                      night.
+                    </p>
+                  </div>
+                )}
               </ul>
             </div>
           </div>
-
-          <Navbar />
+          <div className="mt-10">
+            <Navbar />
+          </div>
         </main>
       )}
     </>

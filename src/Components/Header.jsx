@@ -8,22 +8,36 @@ export default function Header() {
   const [loading, setLoading] = useState(false);
 
   const jwt = window.localStorage.getItem("jwt");
-  const fetchData = async () => {
-    setLoading(true);
-    try {
-      const docref = doc(db, "Users", jwt);
-      const username = await getDoc(docref);
-      setUser(username.data());
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      console.error("Error fetching data:", error);
-    }
-  };
 
   useEffect(() => {
+    let isMounted = true;
+
+    const fetchData = async () => {
+      setLoading(true);
+
+      try {
+        const docref = doc(db, "Users", jwt);
+        const username = await getDoc(docref);
+
+        if (isMounted) {
+          setUser(username.data());
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
+      }
+    };
+
     fetchData();
-  }, []);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [jwt]);
+
   return (
     <>
       {loading ? (
@@ -37,9 +51,6 @@ export default function Header() {
           <p className="text-lg font-semibold">
             Discover upcoming events and check the weather on event days.
           </p>
-          {/* <button className="text-black bg-white rounded-full px-4 py-2 font-poppins text-sm mt-5">
-            Get Started
-          </button> */}
         </div>
       )}
     </>

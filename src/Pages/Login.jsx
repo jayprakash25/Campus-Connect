@@ -19,23 +19,19 @@ export default function Login() {
     setLoading(true);
 
     try {
-      //const auth = getAuth();
-      signInWithEmailAndPassword(auth, user.email, user.password)
-        .then((userCredential) => {
-          // Signed in
-          console.log(userCredential);
-          navigate("/home");
-          // const user = userCredential.user;
-          // ...
-        })
-        .catch((error) => {
-          setLoading(false);
-          console.log(error);
-        });
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        user.email,
+        user.password
+      );
+      console.log(userCredential);
+      navigate("/home");
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
   };
+
   return (
     <div className="px-5 lg:flex items-center justify-center lg:h-screen">
       {loading ? (

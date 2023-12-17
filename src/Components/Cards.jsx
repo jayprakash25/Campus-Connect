@@ -1,8 +1,14 @@
 import { useEffect, useState } from "react";
 import cloudy from "../assets/cloudy.png";
 import axios from "axios";
+import Aos from "aos";
+import "aos/dist/aos.css";
+
 export default function Cards() {
   const [weatherData, setWeatherData] = useState("");
+  useEffect(() => {
+    Aos.init();
+  }, []);
 
   const getUserLocation = async () => {
     try {
@@ -56,6 +62,8 @@ export default function Cards() {
           <div
             className="flex space-x-3 border shadow px-3 py-3 justify-between rounded-md"
             key={i}
+            data-aos="zoom-in"
+            data-aos-duration="500"
           >
             <div className="w-20 flex h-14 items-center rounded-full p-2 border shadow">
               <img className="w-20" src={_.logo} alt="logo" />
