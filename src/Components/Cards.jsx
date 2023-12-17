@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 const WeatherCard = ({ logo, weather, activity }) => {
   return (
     <div
-      className="flex space-x-3 border shadow px-3 py-3 justify-between rounded-md"
+      className="flex space-x-3 border shadow px-3 py-3 justify-between bg-white   rounded-md"
       data-aos="zoom-in"
       data-aos-duration="500"
     >
@@ -81,16 +81,18 @@ const Cards = () => {
   ];
 
   return (
-    <div className="px-5">
-      <h1 className="text-2xl font-semibold py-6">Your Activity</h1>
-      {data.map(({ logo, weather, activity }, i) => (
-        <WeatherCard
-          key={i}
-          logo={logo}
-          weather={weather}
-          activity={activity}
-        />
-      ))}
+    <div className="px-5 lg:px-24">
+      <h1 className="text-2xl font-semibold py-6 text-white">Your Activity</h1>
+      <div className="lg:grid lg:grid-cols-3">
+        {data.map(({ logo, weather, activity }, i) => (
+          <WeatherCard
+            key={i}
+            logo={logo}
+            weather={weather}
+            activity={activity}
+          />
+        ))}
+      </div>
     </div>
   );
 };

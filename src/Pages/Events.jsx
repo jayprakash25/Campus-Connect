@@ -118,18 +118,20 @@ const Events = () => {
 
   return (
     <main>
-      <div className="p-7 px-5 bg-[#4CB9E7]">
+      <div className="p-7 px-5 lg:px-24 bg-[#0766AD]">
         <h1 className="text-2xl font-semibold text-white font-poppins">
           Events
         </h1>
       </div>
       {/* events */}
-      <div className="px-5 grid justify-center lg:grid lg:grid-cols-3  items-center gap-7 my-5 lg:my-10 lg:place-items-center">
+      <div className="px-5 lg:px-24 grid justify-center lg:grid lg:grid-cols-3  items-center gap-7 my-5 lg:my-10 lg:place-items-center">
         {data.map((item, i) => (
           <EventItem key={i} {...item} />
         ))}
       </div>
-      <Navbar />
+      <div className="mt-16">
+        <Navbar />
+      </div>
     </main>
   );
 };

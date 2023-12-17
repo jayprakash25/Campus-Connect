@@ -42,11 +42,11 @@ export default function Header() {
     <>
       {loading ? (
         // Display the loading spinner or GIF while content is loading
-        <div className="flex  items-center justify-center h-screen">
+        <div className="flex bg-white items-center justify-center h-screen">
           <img className="w-20" src={loader} alt="Loading" />
         </div>
       ) : (
-        <div className="bg-[#4CB9E7] text-white space-y-2 font-poppins pt-16 pb-10 px-5">
+        <div className="bg-[#0766AD] text-white space-y-2 font-poppins pt-16 pb-10 px-5 lg:px-24">
           <p className="text-2xl">Hi {user.username},</p>
           <p className="text-lg font-semibold">
             Discover upcoming events and check the weather on event days.

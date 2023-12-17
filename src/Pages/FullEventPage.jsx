@@ -103,8 +103,8 @@ export default function FullEventPage() {
                 />
               </div>
             </div>
-            <div className=" py-6 text-left w-full">
-              <h1 className="text-lg font-bold text-slate-800">
+            <div className=" py-6 text-left w-full lg:pl-48 lg:py-10">
+              <h1 className="text-lg lg:text-2xl font-bold text-slate-800">
                 Fun Outdoors, Whatever the Weather: Your Go-To Activity Guide!
               </h1>
               <ul className="space-y-3 my-3 text-gray-500  text-sm">
@@ -129,10 +129,10 @@ export default function FullEventPage() {
                 )}
                 {isCloudyOrCool && (
                   <div className="space-y-2">
-                    <h2 className="font-bold text-lg">
+                    <h2 className="font-bold text-lg lg:text-xl">
                       Explore Indoor Activities!
                     </h2>
-                    <p className="font-poppins text-sm">
+                    <p className="font-poppins text-sm lg:text-lg">
                       Visit a museum, try indoor sports, or have a cozy movie
                       night.
                     </p>
