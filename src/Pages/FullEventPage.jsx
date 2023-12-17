@@ -26,8 +26,8 @@ export default function FullEventPage() {
     });
   };
 
-  const isWarmAndSunny = data?.main?.temp >= 24 && data?.clouds?.all < 50;
-  const isHotAndHumid = data?.main?.temp >= 29 && data?.main?.humidity >= 70;
+  const isWarmAndSunny = data?.main?.temp >= 24 || data?.clouds?.all < 50;
+  const isHotAndHumid = data?.main?.temp >= 29 || data?.main?.humidity >= 70;
   const isCloudyOrCool = data?.clouds?.all >= 50 || data?.main?.temp < 15;
 
   useEffect(() => {
