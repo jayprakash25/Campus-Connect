@@ -9,32 +9,29 @@ import Aos from "aos";
 import "aos/dist/aos.css";
 
 export default function FullEventPage() {
-  useEffect(() => {
-    Aos.init();
-  }, []);
   const page = useLocation();
-  const [data, setData] = useState("");
-  const [loading, setLoading] = useState(false);
   const { image, Tittle, location, Date, Time, FullAddress, Lat, Long } =
     page.state;
 
-  const api_key = `405e4dc7759a0577b7cfac44e489076e`;
+  const apiKey = "405e4dc7759a0577b7cfac44e489076e";
+  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${Lat}&lon=${Long}&appid=${apiKey}&units=metric`;
 
-  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${Lat}&lon=${Long}&appid=${api_key}&units=metric`;
+  const [data, setData] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const getWeather = () => {
-    setLoading(true);
     axios.get(url).then((response) => {
       setData(response.data);
       setLoading(false);
     });
   };
 
-  const isWarmAndSunny = data?.main?.temp >= 24 && data?.clouds?.all < 50; // 75°F to Celsius
-  const isHotAndHumid = data?.main?.temp >= 29 && data?.main?.humidity >= 70; // 85°F to Celsius
-  const isCloudyOrCool = data?.clouds?.all >= 50 || data?.main?.temp < 15; // 60°F to Celsius
+  const isWarmAndSunny = data?.main?.temp >= 24 && data?.clouds?.all < 50;
+  const isHotAndHumid = data?.main?.temp >= 29 && data?.main?.humidity >= 70;
+  const isCloudyOrCool = data?.clouds?.all >= 50 || data?.main?.temp < 15;
 
   useEffect(() => {
+    Aos.init();
     getWeather();
   }, []);
 
