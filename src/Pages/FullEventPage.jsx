@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import WeatherTable from "../Components/WeatherTable";
 import Navbar from "../Components/Navbar";
 import loader from "../assets/loader.gif";
@@ -13,18 +13,18 @@ export default function FullEventPage() {
   const { image, Tittle, location, Date, Time, FullAddress, Lat, Long } =
     page.state;
 
-  const apiKey = "405e4dc7759a0577b7cfac44e489076e";
+  const apiKey = "YOUR-API-KEY";
   const url = `https://api.openweathermap.org/data/2.5/weather?lat=${Lat}&lon=${Long}&appid=${apiKey}&units=metric`;
 
   const [data, setData] = useState("");
   const [loading, setLoading] = useState(true);
 
-  const getWeather = () => {
+  const getWeather = useCallback(() => {
     axios.get(url).then((response) => {
       setData(response.data);
       setLoading(false);
     });
-  };
+  }, [url]);
 
   const isWarmAndSunny = data?.main?.temp >= 24 || data?.clouds?.all < 50;
   const isHotAndHumid = data?.main?.temp >= 29 || data?.main?.humidity >= 70;
@@ -33,7 +33,7 @@ export default function FullEventPage() {
   useEffect(() => {
     Aos.init();
     getWeather();
-  }, []);
+  }, [getWeather]);
 
   return (
     <>
